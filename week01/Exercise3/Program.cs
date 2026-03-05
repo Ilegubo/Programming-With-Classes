@@ -7,11 +7,11 @@ class Program
         Console.Clear();
         Console.WriteLine("Hello World! This is the Exercise3 Project.");
         Console.WriteLine("This is a number guessing game.\n");
+        string userResponse = "yes";
         Random magic = new Random();
-        int magicNumber = magic.Next(1,100);
+        int magicNumber = magic.Next(1,101);
         int guessNumber;
         int attempts = 1;
-        string userResponse = "yes";
     
             do
             {
@@ -31,7 +31,12 @@ class Program
                     Console.WriteLine("You guessed it!");
                     Console.WriteLine($"Number of attempts: {attempts}");
                     Console.Write("Would like to play again? ");
-                    userResponse =Console.ReadLine();
+                    userResponse = Console.ReadLine();
+                    magicNumber = magic.Next(1,101);
+                    attempts = 1;
+                    Console.Clear();
+                    Console.Clear();
+
                 }
                 attempts += 1;
             } while (!(guessNumber == magicNumber) && userResponse == "yes");
