@@ -20,11 +20,11 @@ class Program
                 guessNumber = int.Parse(guess);
                 if (guessNumber > magicNumber)
                 {
-                    Console.WriteLine("Lower");
+                    Console.WriteLine("Lower\n");
                 }
                 else if (guessNumber < magicNumber)
                 {
-                    Console.WriteLine("Higher");
+                    Console.WriteLine("Higher\n");
                 }
                 else
                 {
