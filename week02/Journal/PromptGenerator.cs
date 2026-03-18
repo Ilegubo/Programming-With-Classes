@@ -1,19 +1,31 @@
-using System;
-using System.Collections.Generic;
-
-class PromptGenerator
+namespace JournalApp;
+public class PromptGenerator
 {
-    static string _First = "What was the best thing that happened today?";
-    static string _Second = "If you could improve on something today, what would that be?";
-    static string _Third = "What happened today that made you realize the hand of God in your life?";
-    static string _Fourth = "What would you do to draw close to God?";
-    static string _Fifth = "In what way did you show or experience love today?";
-    static List<string> _Prompts = new List<string> {_First, _Second, _Third, _Fourth, _Fifth};
-    string SelectPrompt()
+    public List<string> _prompts = new List<string>();
+
+    public void QuestionBank()
     {
-        Random randomIndex = new Random();
-        string _prompt = _Prompts[randomIndex.Next(_Prompts.Count)];
-        Console.WriteLine(_prompt);
-        return _prompt;
+ 
+            string first = "How did you see that hand of God today in your life.";
+            string second = "How did you show or experience love today?";
+            string third = "What about today would like to improve?";
+            string fourth = "What made your day productive today?";
+            string fifth = "If you had the power to, what about today would you change?";
+            _prompts.Add(first);
+            _prompts.Add(second);
+            _prompts.Add(third);
+            _prompts.Add(fourth);
+            _prompts.Add(fifth);
+    }
+
+    public string SelectPrompt()
+    {
+        if (_prompts.Count == 0)
+        {
+            QuestionBank();
+        }
+        Random random = new Random();
+        int randomIndex = random.Next(0, _prompts.Count);
+        return _prompts[randomIndex];
     }
 }

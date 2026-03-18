@@ -1,31 +1,59 @@
 using System;
-using System.IO.Enumeration;
+using JournalApp;
 
 class Program
 {
+    
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello World! This is the Journal Project.");
-
-        Menu();
-        string user_Choice = Console.ReadLine();
-        
-        if (user_Choice == "1")
+        Console.Clear();
+        Journal _journal = new Journal();
+        bool quit = false;
+        do
         {
-            Journal newJournal = new Journal();
-            newJournal.
-        }
+            Menu();
+            string userChoice = Console.ReadLine();
+            if (userChoice == "1")
+            {
+                Console.Write("File Name: ");
+                string fileName = Console.ReadLine();
+                _journal.Load(fileName);
+            }
 
+            else if (userChoice == "2")
+            {
+                Console.Write("File Name: ");
+                string fileName = Console.ReadLine();
+                _journal.Save(fileName);
+            }
+
+            else if (userChoice == "3")
+
+            {
+                Entry entry = new Entry();
+                _journal.AddEntry(entry);
+            }
+
+            else if (userChoice == "4")
+            {
+                _journal.Display();
+            }
+
+            else if (userChoice == "5")
+            {
+                Console.WriteLine("Exiting...");
+                quit = true;
+            }
+        } while (quit == false);
     }
 
     static void Menu()
     {
-        Console.WriteLine("1: Load");
-        Console.WriteLine("2: Save");
-        Console.WriteLine("3: Display");
-        Console.WriteLine("4: Write Entry");
-        Console.Write("Option: ");
+        Console.WriteLine("1: Load File");
+        Console.WriteLine("2: Save File");
+        Console.WriteLine("3: Write Entry");
+        Console.WriteLine("4: Display Entries");
+        Console.WriteLine("5:Quit");
+        Console.Write("\nOption: ");
     }
-
-
 }

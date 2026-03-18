@@ -1,38 +1,82 @@
+namespace JournalApp;
+using System.IO;
+using System.Text.Json;
 
-class Journal
+public class Journal
 {
-    string _fileName;
-    string _fileContent;
-    void Display()
+    public List<Entry> _entries = new List<Entry>();
+    public List<Entry> loadEntries = new List<Entry>();
+    public void Load(string fileName)
+{
+    if (!fileName.EndsWith(".txt") && !fileName.EndsWith(".json"))
     {
-        Console.WriteLine(_fileContent);
+        fileName += ".json";
     }
 
-    bool Load(string fileName)
+    try
     {
-        try
+        if (File.Exists(fileName))
         {
-            _fileContent = System.IO.File.ReadAllText(fileName);
-            return true;
+            string jsonString = File.ReadAllText(fileName);
+            List<Entry>? loadedData = JsonSerializer.Deserialize<List<Entry>>(jsonString);
+            
+            if (loadedData != null)
+            {
+                _entries = loadedData;
+            }
         }
-        catch (IOException e)
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine($"Error loading file: {e.Message}");
+    }
+}
+
+    public void Save(string fileName)
+{
+    if (!fileName.EndsWith(".txt") && !fileName.EndsWith(".json"))
+    {
+        fileName += ".json";
+    }
+
+    try
+    {
+        string jsonString = JsonSerializer.Serialize(_entries, new JsonSerializerOptions { WriteIndented = true });
+        
+        File.WriteAllText(fileName, jsonString);
+    }
+    catch (IOException)
+    {
+        Console.WriteLine("Error occurred during saving!");
+    }
+}
+
+    public void AddEntry(Entry newEntry)
+    {
+        newEntry._entryText = "";
+        while (string.IsNullOrEmpty(newEntry._entryText))
         {
-            Console.WriteLine("error 404: file not found.");
-            return false;
+            Console.WriteLine(newEntry._promptText);
+            Console.Write("Response: ");
+            newEntry._entryText = Console.ReadLine();
+        }
+        _entries.Add(newEntry);
+    }
+    public void Display()
+    {
+        if (_entries.Count > 0)
+        {
+            foreach (Entry newEntry in _entries)
+            {
+                Console.Write($"{newEntry._date} {newEntry._promptText}\n");
+                Console.WriteLine(newEntry._entryText);
+            }
+        }
+        else
+
+        {
+            Console.WriteLine("\nNo entries found!\n");
         }
     }
 
-    bool Save(string fileName)
-    {
-        try
-        {
-            System.IO.File.WriteAllText(_fileName, _fileContent);
-            return true;
-        }
-        catch (IOException)
-        {
-            Console.WriteLine("Error:");
-            return false;
-        }
-    }
 }

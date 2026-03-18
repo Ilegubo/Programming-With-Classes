@@ -1,9 +1,15 @@
-class Entry
+namespace JournalApp;
+
+public class Entry
 {
-    string _entry;
-    void journalEntry(string content, string prompt)
+    
+    public string _date = DateTime.Now.ToShortDateString();
+    public string _promptText = new PromptGenerator().SelectPrompt();
+    public string _entryText;
+    
+
+    public void Display()
     {
-        string today = DateTime.Today.ToString("dd/MM/yyyy");
-        _entry = $"{today}\n{prompt}\n{content}";
+        Console.WriteLine($"{_date}\n{_promptText}\n{_entryText}");
     }
 }
