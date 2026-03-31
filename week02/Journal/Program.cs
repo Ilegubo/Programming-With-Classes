@@ -1,3 +1,4 @@
+// Implemented default file format to be JSON
 using System;
 using JournalApp;
 
