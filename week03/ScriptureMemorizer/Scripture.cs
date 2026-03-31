@@ -71,7 +71,7 @@ public class Scripture
         float percentage = (float)mastery / length;
         if ((float)mastery/length <= 0.5)
         {
-            Console.WriteLine("Matery : [##]");
+            Console.WriteLine("Mastery : [##]");
         }
         else if ((float)mastery / length < 1)
         {
