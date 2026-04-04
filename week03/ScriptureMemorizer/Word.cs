@@ -13,10 +13,10 @@ public class Word
     public void Hide()
     {
         _isHidden = true;
-        Console.Write(string.Join("*", new string[_text.Length]));
+        Console.WriteLine(string.Join("*", new string[_text.Length]));
     }
 
-    public void show()
+    public void Show()
     {
         _isHidden = false;
         Console.WriteLine(_text);
