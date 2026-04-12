@@ -1,5 +1,5 @@
 using System;
-
+// Used a spinning stroke animation in the terminal.
 namespace MindfulnessProgram
 {
     class Program
