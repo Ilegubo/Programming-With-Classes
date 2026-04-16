@@ -1,4 +1,5 @@
 using System;
+// Implemented a progress bar in CheclistGoal method
 
 public class ChecklistGoal : Goal
 {
@@ -31,10 +32,19 @@ public class ChecklistGoal : Goal
     }
 
     public override string GetDetailsString()
-    {
-        string status = IsComplete() ? "[X]" : "[ ]";
-        return $"{status} {_shortName} ({_description}) -- Currently completed: {_amountCompleted}/{_target}";
-    }
+{
+    string status = IsComplete() ? "[X]" : "[ ]";
+    
+    int barWidth = 10;
+    float percentage = (float)_amountCompleted / _target;
+    int filledLength = (int)(barWidth * percentage);
+    
+    if (filledLength > barWidth) filledLength = barWidth;
+
+    string progressBar = new string('|', filledLength) + new string('❌', barWidth - filledLength);
+
+    return $"{status} {_shortName} ({_description}) |{progressBar}| {_amountCompleted}/{_target}";
+}
 
     public override string GetStringRepresentation()
     {
