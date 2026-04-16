@@ -1,5 +1,5 @@
 using System;
-// Implemented a progress bar in CheclistGoal method
+// Implemented a progress bar in CheclistGoal method with full block character to indicated progress and "X" to represent uncompleted.
 
 public class ChecklistGoal : Goal
 {
@@ -34,14 +34,14 @@ public class ChecklistGoal : Goal
     public override string GetDetailsString()
 {
     string status = IsComplete() ? "[X]" : "[ ]";
-    
+
     int barWidth = 10;
     float percentage = (float)_amountCompleted / _target;
     int filledLength = (int)(barWidth * percentage);
     
     if (filledLength > barWidth) filledLength = barWidth;
 
-    string progressBar = new string('|', filledLength) + new string('❌', barWidth - filledLength);
+    string progressBar = new string('█', filledLength) + new string('X', barWidth - filledLength);
 
     return $"{status} {_shortName} ({_description}) |{progressBar}| {_amountCompleted}/{_target}";
 }
